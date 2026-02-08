@@ -5,7 +5,8 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run the application
-FROM openjdk:17-jdk-slim
+# We are switching from 'openjdk' to 'eclipse-temurin' (more reliable)
+FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
